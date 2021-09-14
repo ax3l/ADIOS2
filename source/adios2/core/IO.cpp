@@ -58,19 +58,11 @@ IO::EngineFactoryEntry IO_MakeEngine_HDF5();
 
 namespace
 {
-
 std::unordered_map<std::string, IO::EngineFactoryEntry> Factory = {
     {"bp3",
      {IO::MakeEngine<engine::BP3Reader>, IO::MakeEngine<engine::BP3Writer>}},
     {"bp4",
      {IO::MakeEngine<engine::BP4Reader>, IO::MakeEngine<engine::BP4Writer>}},
-    {"hdfmixer",
-#ifdef ADIOS2_HAVE_HDF5
-#else
-     IO::NoEngineEntry("ERROR: this version didn't compile with "
-                       "HDF5 library, can't use HDF5 engine\n")
-#endif
-    },
     {"dataman",
 #ifdef ADIOS2_HAVE_DATAMAN
      {IO::MakeEngine<engine::DataManReader>,
