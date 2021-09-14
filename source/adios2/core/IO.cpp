@@ -54,7 +54,6 @@ namespace adios2
 namespace core
 {
 
-IO::EngineFactoryEntry IO_MakeEngine_HDFMixer();
 IO::EngineFactoryEntry IO_MakeEngine_HDF5();
 
 namespace
@@ -67,7 +66,6 @@ std::unordered_map<std::string, IO::EngineFactoryEntry> Factory = {
      {IO::MakeEngine<engine::BP4Reader>, IO::MakeEngine<engine::BP4Writer>}},
     {"hdfmixer",
 #ifdef ADIOS2_HAVE_HDF5
-     IO_MakeEngine_HDFMixer()
 #else
      IO::NoEngineEntry("ERROR: this version didn't compile with "
                        "HDF5 library, can't use HDF5 engine\n")
