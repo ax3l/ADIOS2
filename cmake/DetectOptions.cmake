@@ -70,13 +70,13 @@ endfunction()
 # Blosc2
 if(ADIOS2_USE_Blosc2 STREQUAL AUTO)
   # Prefect CONFIG mode
-  find_package(Blosc2 2.4 CONFIG QUIET)
+  find_package(Blosc2 2.4 CONFIG)
   if(NOT Blosc2_FOUND)
     find_package(Blosc2 2.4 MODULE QUIET)
   endif()
 elseif(ADIOS2_USE_Blosc2)
   # Prefect CONFIG mode
-  find_package(Blosc2 2.4 CONFIG REQUIRED)
+  find_package(Blosc2 2.4 CONFIG)
   if(NOT Blosc2_FOUND)
     find_package(Blosc2 2.4 MODULE REQUIRED)
   endif()
@@ -88,6 +88,7 @@ if(Blosc2_FOUND)
   endif()
 
   set(adios2_blosc2_tgt Blosc2::Blosc2)
+  message(STATUS "++++++++++ Blosc2_VERSION=${Blosc2_VERSION} ++++")
   if (Blosc2_VERSION VERSION_GREATER_EQUAL 2.10.1)
     if (Blosc2_shlib_available)
       set(adios2_blosc2_tgt Blosc2::blosc2_$<IF:$<BOOL:${ADIOS2_Blosc2_PREFER_SHARED}>,shared,static>)
